@@ -111,20 +111,26 @@ The following task is advanced and therefore optional.
 * Refer to the Plotly.js documentation https://plot.ly/javascript/ to an external site.when building the plots.
 
 ##  <span style="color:indigo"> **Requirements** </span>
-### ***Deliverable 1: Scrape Titles and Preview Text from Mars News (40 points)***
-* Automated browsing (with Splinter) was used to visit the Mars news site, and the HTML code was extracted (with Beautiful Soup) (10 points)
+### ***Bar Chart (30 points)***
+* Chart initializes without error (10 points)
+* Chart updates when a new sample is selected (5 points)
+* Chart uses Top 10 sample values as values (5 points)
+* Chart uses otu_ids as the labels (5 points)
+* Chart uses otu_labels as the tooltip (5 points)
 
-* The titles and preview text of the news articles were scraped and extracted (20 points)
+### ***Bubble Charts (40 points)***
+* Chart initializes without error (10 points)
+* Chart updates when a new sample is selected (5 points)
+* Chart uses otu_ids for the x values (5 points)
+* Chart uses otu_ids for marker colors (5 points)
+* Chart uses sample_values for the y values (5 points)
+* Chart uses sample_values for the marker size (5 points)
+* Chart uses `otu_labels for text values (5 points)
 
-* The scraped information was stored in the specified Python data structure—specifically, a list of dictionaries (10 points)
-
-### ***Deliverable 2: Scrape and Analyze Mars Weather Data (60 points)***
-* The HTML table was extracted into a Pandas DataFrame. Splinter and Beautiful Soup were used to scrape the data. The columns have the correct headings and data types (15 points)
-
-* The data was analyzed to answer all five listed questions, with data visualizations provided when specified (40 points)
-
-* The DataFrame was exported into a CSV file (5 points)
-
+### ***Metadata and Deployment (30 points)***
+* Metadata initializes without error (10 points)
+* Metadata updates when a new sample is selected (10 points)
+* App Successfully Deployed to Github Pages (10 points)
 
 ## <span style="color:violet"> **References**  </span>
 Hulcr, J. et al. (2012) A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable. Retrieved from: http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/
