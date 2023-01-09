@@ -136,3 +136,6 @@ The following task is advanced and therefore optional.
 Hulcr, J. et al. (2012) A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable. Retrieved from: http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/
 
 © 2023 edX Boot Camps LLC
+
+Links to New Things I've learned:
+https://stackoverflow.com/questions/13239368/how-to-close-git-commit-editor
