@@ -8,20 +8,45 @@ console.log("Data Promise: ", dataPromise);
  
 d3.json(url).then(function(data) {
 
-// let nameddl = d3.select('select')
-//   names.forEach(nameber => nameddl.append(option.attr('value', nameber).text(nameber)));
+console.log(data.names[2]);
 
-//     for (let duck = 0; duck < data['names'].length; duck++) {
-//         let currentduck = Object.values(data['names'][duck]);
 
-//         console.log(currentduck)
-//         // li1.text(`${data['names']}`)
-//     }
-    
-// for (let m = 0; m <movies.length; m++) {
-// let currentMovie = movies[m];
-// let li1 = d3.select('ul').append('li')
-// li1.text(`id: ${demoinfo.id}`)
+let nameddl = d3.select('select');
+// nameddl.append(option.attr("value",940).text(940));
+//   data.names.forEach(nameber => nameddl.append(option.attr('value', nameber).text(nameber)));
+  
+// data.names.forEach(nameber =>{
+//   let nameddl = d3.select('select').append('option');
+//   option.value = nameber,
+//   option.text = nameber
+// });
+
+  // Object.entries(demoInfo).forEach(([key,value])=> {
+  //   bob = key,
+  //   value = value,
+  //   console.log(bob)
+  //   console.log(value)
+  //   let li = d3.select('ul').append('li')
+  //   li.text(`${bob}:${value}`)
+  // });
+//nick's original code  kept getting error app.js:34 Uncaught (in promise) ReferenceError: option is not defined at app.js:34:41
+// let myddl = d3.select('select')
+// data.names.forEach(name => myddl.append(option.attr("value", name)).text(name))
+
+
+  // //nick's code with a few fixes  WORKS
+  let myddl = d3.select('select')
+  data.names.forEach(nameber => myddl.append('option').attr('value', nameber).text(nameber));
+
+//Chris try another way - WORKS
+  // Object.entries(data.names).forEach(([key,value])=> {
+  //   currentValue = value;
+  //   console.log(currentValue)
+  //   let bob = d3.select('select').append('option');
+  //   bob.attr('value',currentValue)
+  //   bob.text(currentValue)
+  // });
+
 
     let nameindex = 0
 
