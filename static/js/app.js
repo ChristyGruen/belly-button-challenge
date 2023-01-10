@@ -5,11 +5,25 @@ const dataPromise = d3.json(url);
 console.log("Data Promise: ", dataPromise);
 
 // Fetch the JSON data and console log it
-let listofalllists = [];
  
 d3.json(url).then(function(data) {
 
-    let nameindex = 1
+// let nameddl = d3.select('select')
+//   names.forEach(nameber => nameddl.append(option.attr('value', nameber).text(nameber)));
+
+//     for (let duck = 0; duck < data['names'].length; duck++) {
+//         let currentduck = Object.values(data['names'][duck]);
+
+//         console.log(currentduck)
+//         // li1.text(`${data['names']}`)
+//     }
+    
+// for (let m = 0; m <movies.length; m++) {
+// let currentMovie = movies[m];
+// let li1 = d3.select('ul').append('li')
+// li1.text(`id: ${demoinfo.id}`)
+
+    let nameindex = 0
 
     console.log(data)
     console.log(data['names'])
@@ -17,80 +31,114 @@ d3.json(url).then(function(data) {
     console.log(data['samples'])
     console.log(data['samples'][nameindex].id)
 //probably don't need to map this stuff
-    let lNames = data['names'].map(function(item) {
-        return item;
-    });
-    console.log(lNames)
+    // let lNames = data['names'].map(function(item) {
+    //     return item;
+    // });
+    // console.log(lNames)
 
-    let lmetadata = data['metadata'].map(function(item) {
-        return item;
-    });
-    console.log(lmetadata)
+    // let lmetadata = data['metadata'].map(function(item) {
+    //     return item;
+    // });
+    // console.log(lmetadata)
 
-    let lsamples= data['samples'].map(function(item) {
-        return item;
-    });
-    console.log(lsamples) 
-    console.log(lsamples[nameindex])
-    console.log(lsamples[nameindex].id)
-    console.log(lsamples[nameindex].otu_ids)
-    console.log(lsamples[nameindex].otu_ids[2])
+    // let lsamples= data['samples'].map(function(item) {
+    //     return item;
+    // });
+    // console.log(lsamples) 
+    // console.log(lsamples[nameindex])
+    // console.log(lsamples[nameindex].id)
+    // console.log(lsamples[nameindex].otu_ids)
+    // console.log(lsamples[nameindex].otu_ids[2])
 
-    let mdv = Object.values(data.metadata);
-    console.log(mdv)
+    // let mdv = Object.values(data.metadata);
+    // console.log(mdv)
 
-    let metadatalabels = Object.keys(data.metadata);
-    console.log(metadatalabels)
+    // let metadatalabels = Object.keys(data.metadata);
+    // console.log(metadatalabels)
 
 //DEMOGRAPHIC INFO
-let demoinfo = data.metadata[nameindex];
-    console.log(demoinfo)
+let demoInfo = data.metadata[nameindex];
+    console.log(demoInfo)
 
     // metadata940 =  [{id: 940, ethnicity: "Caucasian", gender: "F", age: 24.0, location: "Beaufort/NC", bbtype: "I", wfreq: 2.0}];
     // // metadata940 = {"id": 940, "ethnicity": "Caucasian", "gender": "F", "age": 24.0, "location": "Beaufort/NC", "bbtype": "I", "wfreq": 2.0}]
-    currentId = demoinfo['id'];
-    currentEthnicity = demoinfo['ethnicity'];
-    currentGender = demoinfo['gender'];
-    currentAge = demoinfo['age'];
-    currentLocation = demoinfo['location'];
-    currentBbtype = demoinfo['bbtype'];
-    currentwfreq = demoinfo['wfreq'];
+    // currentId = demoinfo['id'];
+    // currentEthnicity = demoinfo['ethnicity'];
+    // currentGender = demoinfo['gender'];
+    // currentAge = demoinfo['age'];
+    // currentLocation = demoinfo['location'];
+    // currentBbtype = demoinfo['bbtype'];
+    // currentwfreq = demoinfo['wfreq'];
     
-    console.log(demoinfo.id)
-    console.log(demoinfo.ethnicity)
-    console.log(demoinfo.gender)
-    console.log(demoinfo.age)
-    console.log(demoinfo.location)
-    console.log(demoinfo.bbtype)
-    console.log(demoinfo.wfreq)
+    // console.log(demoinfo.id)
+    // console.log(demoinfo.ethnicity)
+    // console.log(demoinfo.gender)
+    // console.log(demoinfo.age)
+    // console.log(demoinfo.location)
+    // console.log(demoinfo.bbtype)
+    // console.log(demoinfo.wfreq)
+// let ldemoInfo = [data.metadata[nameindex]]
+// let pimento = [];
+// ldemoInfo.forEach(olive => pimento.push(olive[0]));
+// console.log(ldemoInfo);
+// const demoinfokeys = Object.keys(demoInfo);
+// console.log(demoinfokeys)
+// //might be able to automate the list?? 
+// for(key in demoInfo){
+//   bob = Object.keys(key)
+//   value = demoInfo[key]
+//   console.log(bob)
+//   console.log(value)
+// };
 
-    let li1 = d3.select('ul').append('li')
-    li1.text(`id: ${demoinfo.id}`)
-    let li2 = d3.select('ul').append('li')
-    li2.text(`ethnicity: ${demoinfo.ethnicity}`)
-    let li3 = d3.select('ul').append('li')
-    li3.text(`gender: ${demoinfo.gender}`)
-    let li4 = d3.select('ul').append('li')
-    li4.text(`age: ${demoinfo.age}`)
-    let li5 = d3.select('ul').append('li')
-    li5.text(`location: ${demoinfo.location}`)
-    let li6 = d3.select('ul').append('li')
-    li6.text(`bbtype: ${demoinfo.bbtype}`)
-    let li7 = d3.select('ul').append('li')
-    li7.text(`wfreq: ${demoinfo.wfreq}`)
+Object.entries(demoInfo).forEach(([key,value])=> {
+  bob = key,
+  value = value,
+  console.log(bob)
+  console.log(value)
+  let li = d3.select('ul').append('li')
+  li.text(`${bob}:${value}`)
+});
+
+    // let li1 = d3.select('ul').append('li')
+    // li1.text(`id: ${demoInfo.id}`)
+    // let li2 = d3.select('ul').append('li')
+    // li2.text(`ethnicity: ${demoInfo.ethnicity}`)
+    // let li3 = d3.select('ul').append('li')
+    // li3.text(`gender: ${demoInfo.gender}`)
+    // let li4 = d3.select('ul').append('li')
+    // li4.text(`age: ${demoInfo.age}`)
+    // let li5 = d3.select('ul').append('li')
+    // li5.text(`location: ${demoInfo.location}`)
+    // let li6 = d3.select('ul').append('li')
+    // li6.text(`bbtype: ${demoInfo.bbtype}`)
+    // let li7 = d3.select('ul').append('li')
+    // li7.text(`wfreq: ${demoInfo.wfreq}`)
 
 //BAR CHART ;
-
+// let ohBoyyr = data.samples[nameindex].otu_ids.slice(0,10);//.reverse();//otu_ids
+// let ohBoyxr = [data.samples[nameindex].sample_values.slice(0,10)];//.reverse();//sample_values
+// let ohBoyzr = [data.samples[nameindex].otu_labels.slice(0,10)];//.reverse();//otu_labels
+// console.log(ohBoyyr)
+// console.log(ohBoyxr)
+// console.log(ohBoyzr)
 //need to get first 10 from data
-let ohBoyy = [`otu_id ${data.samples[nameindex].otu_ids[0]}`];//.reverse();//otu_ids
-let ohBoyx = [data.samples[nameindex].sample_values[0]];//.reverse();//sample_values
-let ohBoyz = [data.samples[nameindex].otu_labels[0]];//.reverse();//otu_labels
+// let ohBoyy = [`otu_id ${data.samples[nameindex].otu_ids.slice(0,10)}`];//.reverse();//otu_ids
+let ohBoyy = data.samples[nameindex].otu_ids.slice(0,10).reverse();//otu_ids
+let ohBoyystr = []
+ohBoyy.forEach(pear => ohBoyystr.push(`OTU_${pear}`));
+console.log(ohBoyystr)
+let ohBoyx = data.samples[nameindex].sample_values.slice(0,10).reverse();//sample_values
+let ohBoyz = data.samples[nameindex].otu_labels.slice(0,10).reverse();//otu_labels
+console.log(ohBoyy)
+console.log(ohBoyx)
+console.log(ohBoyz)
 //double check reverse for the otu_labels once all 10 inputs are captured, had trouble with the reversal before.
 
 let trace1 = {
-    x: ohBoyx.reverse(),
-    y: ohBoyy.reverse(),
-    text: ohBoyz.reverse(),
+    x: ohBoyx,//.reverse(),
+    y: ohBoyystr,//.reverse(),
+    text: ohBoyz,//.reverse(),
     type: 'bar',
     orientation: 'h',
   };
@@ -115,7 +163,7 @@ let trace1 = {
    var trace2 = {
       x: bubblex,
       y: bubbley,
-    //   text: bubblez,
+      text: bubblez,
       mode: 'markers',
       marker: {
         size: bubbley,
@@ -136,9 +184,57 @@ let trace1 = {
     
     Plotly.newPlot('bubble', data2, layout2)
 
+
+
+  d3.selectAll("#selDataset").on("change", getData);
+
+  // Function called by DOM changes
+  function getData() {
+    let dropdownMenu = d3.select("#selDataset");
+    // Assign the value of the dropdown menu option to a letiable
+    let dataset = dropdownMenu.property("value");
+    console.log(dataset)
+  }
+
   //have all chart info before this last bit so you can call the data from the bellybutton site
 
-  });
+});
+//     // Initialize an empty array for the country's data
+//     let data = [];
+  
+//     if (dataset == ) {
+//         data = australia;
+//     }
+//     else if (dataset == 'brazil') {
+//         data = brazil;
+//     }
+//     else if (dataset == 'uk') {
+//         data = uk;
+//     }
+//     else if (dataset == 'mexico') {
+//       data = mexico;
+//     }
+//     else if (dataset == 'singapore') {
+//         data = singapore;
+//     }
+//     else if (dataset == 'southAfrica') {
+//       data = southAfrica;
+//     }
+//   // Call function to update the chart
+//     updatePlotly(data);
+//   }
+  
+//   // Update the restyled plot's values
+//   function updatePlotly(newdata) {
+//     Plotly.restyle("pie", "values", [newdata]);
+//   }
+  
+//   init();
+
+
+
+
+
 
 
 // console.log(dataPromise.length)
@@ -304,3 +400,7 @@ let trace1 = {
 //   };
   
 //   Plotly.newPlot('bubble2', data22, layout2)
+
+// function optionChanged(name)
+// update_Demographicinfo()
+// updateplots()
