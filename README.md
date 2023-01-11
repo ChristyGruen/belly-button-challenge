@@ -3,6 +3,7 @@
 ## **Homework Log**
 
 The Module 14 Challenge homework is located in the belly-button-challenge repository.  
+The Belly Button Biodiversity Dashboard is available at <a href = 'https://christygruen.github.io/belly-button-challenge/' target = '_blank'> https://christygruen.github.io/belly-button-challenge/ </a>.
 
 ---
 ## **Purpose**

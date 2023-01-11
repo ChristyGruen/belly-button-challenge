@@ -1,10 +1,10 @@
 
 
 /* header colors */
-/* h1 {
-    color:rgb(84, 163, 137)
+h1 {
+    color:"darkblue"
 }
-h2 {
+/* h2 {
     color:rgb(84, 163, 137)
 }
 h3 {
@@ -12,7 +12,7 @@ h3 {
 }
 .greenheader {
     color:rgb(84, 163, 137)
-} */
+}  */
 
 /* navbar formatting */
 /* .navbar {
