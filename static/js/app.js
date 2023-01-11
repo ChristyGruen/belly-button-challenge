@@ -183,12 +183,12 @@ function bbWash(nameindex) {
         bordercolor: "gray",
         steps: [
             //color scheme pairs with Jet and Portland
-          { range: [0, 1.5], color: "red"},
-          { range: [1.5, 3], color: "orange"  },
-          { range: [3, 4.5], color: "yellow"  },
-          { range: [4.5, 6], color: "green"  },
-          { range: [6, 7.5], color: "blue"  },
-          { range: [7.5, 9], color: "indigo"  },
+          // { range: [0, 1.5], color: "red"},
+          // { range: [1.5, 3], color: "orange"  },
+          // { range: [3, 4.5], color: "yellow"  },
+          // { range: [4.5, 6], color: "green"  },
+          // { range: [6, 7.5], color: "blue"  },
+          // { range: [7.5, 9], color: "indigo"  },
  
           // color scheme pairs with Plasma
           { range: [0, 1], color: "#f0f921"},
