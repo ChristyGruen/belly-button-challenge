@@ -1,5 +1,5 @@
 let nameindex;
-let varddl = 1601;
+let varddl = 940;
 
 const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
@@ -17,7 +17,7 @@ console.log(data.names[2]);
 // let myddl = d3.select('select')
 // data.names.forEach(name => myddl.append(option.attr("value", name)).text(name))
   // //nick's code with a few fixes  WORKS
-  let myddl = d3.select('select');
+  let myddl = d3.select('#selDataset');
   data.names.forEach(nameber => myddl.append('option').attr('value', nameber).text(nameber));
 
 //Chris try another way - WORKS - keep this code for future reference
@@ -29,6 +29,16 @@ console.log(data.names[2]);
   //   bob.text(currentValue)
   // });
   // let varddl = 1601;
+  function optionChanged(userChoice) {
+    dInfo(userChoice);
+    barChart(userChoice);
+    bubbleChart(userChoice)
+  }
+
+
+
+
+
   const findbob = (element) => element == varddl;
   let mom = data.names.findIndex(findbob);
 console.log(mom)
@@ -37,10 +47,6 @@ console.log(mom)
 
 
     let nameindex = mom;
-
-
-
-
 
 //DEMOGRAPHIC INFO
 // dInfo(0);
@@ -115,57 +121,6 @@ let trace1 = {
     
     Plotly.newPlot('bubble', data2, layout2)};
     bubbleChart(nameindex);
-
-
-    //GAUGECHART
-
-  let gaugechartinfo = data.metadata[nameindex].wfreq;
-  console.log(gaugechartinfo)
-
-  var data = [
-    {
-      type: "indicator",
-      mode: "gauge+number",
-      value: gaugechartinfo,
-      title: { text: "Belly Button Washing Frequency", font: { size: 24 } },
-      // title: { text: "Scrubs per Week", font: { size: 16 } },
-      // delta: { reference: 400, increasing: { color: "RebeccaPurple" } },
-      gauge: {
-        axis: { range: [null, 9], tick0: 0, dticks: 8, tickwidth: 1, tickcolor: "darkblue" },
-        bar: { color: "darkblue" },
-        bgcolor: "white",
-        borderwidth: 2,
-        bordercolor: "gray",
-        steps: [
-          { range: [0, 1.5], color: "red"  },
-          { range: [1.5, 3], color: "orange"  },
-          { range: [3, 4.5], color: "yellow"  },
-          { range: [4.5, 6], color: "green"  },
-          { range: [6, 7.5], color: "blue"  },
-          { range: [7.5, 9], color: "indigo"  },
-          // { range: [6, 7], color: "darkblue"  },
-          // { range: [7, 8], color: "indigo"  },
-          // { range: [8, 9], color: "darkviolet"  }
-        ],
-        // threshold: {
-        //   line: { color: "black", width: 4 },
-        //   thickness: 0.75,
-        //   value: 4
-        // }
-      }
-    }
-  ];
-  
-  var layout = {
-    width: 500,
-    height: 400,
-    margin: { t: 25, r: 25, l: 25, b: 25 },
-    paper_bgcolor: "lavender",
-    font: { color: "darkblue", family: "Arial" }
-  };
-  
-  Plotly.newPlot('gauge', data, layout);
-
   //have all chart info before this last bit so you can call the data from the bellybutton site
 
 });
