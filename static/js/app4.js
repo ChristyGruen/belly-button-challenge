@@ -48,10 +48,8 @@ let dropdown = d3.select("#selDataset");
     varddl = this.value;
     console.log(varddl)
     const findbob = (element) => element == varddl;
-    let mom = data.names.findIndex(findbob);
-    console.log(mom)
-    let nameindex = mom;
-    //need to delete h6s
+    nameindex = data.names.findIndex(findbob);
+    d3.select('.panel-body').html("");
     dInfo(nameindex);
     barChart(nameindex);
     bubbleChart(nameindex);
@@ -76,7 +74,9 @@ let demoInfo = data.metadata[nameindex];
 Object.entries(demoInfo).forEach(([key,value])=> {
   bob = key;
   value = value;
-  let carrot = d3.select('.panel-body').append('h6');
+//   let li = d3.select('ul').append('li');
+//   li.text(`${bob}:${value}`)
+  let carrot = d3.select('.panel-body').append('h5');
   carrot.text(`${bob}:  ${value}`)
 })};
 dInfo(nameindex);
