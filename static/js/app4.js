@@ -1,6 +1,14 @@
 // let nameindex;
 // let varddl = 940;
 
+//Ian helped with this code, didn't work but is almost there
+//   dropdown.on("change", function() {
+//     varddl = this.value;
+//     console.log(varddl);
+    
+//   })
+
+
 const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
 // Promise Pending
@@ -34,22 +42,30 @@ console.log(data.names[2]);
   // });
   let varddl = data.names[0];
 
-
-//   dropdown.on("change", function() {
-//     varddl = this.value;
-//     console.log(varddl);
-    
-//   });
-
-  const findbob = (element) => element == varddl;
-  let mom = data.names.findIndex(findbob);
-console.log(mom)
-
+// Ian helped with this code, didn't work but is almost there
+let dropdown = d3.select("#selDataset");
+  dropdown.on("change", function() {
+    varddl = this.value;
+    console.log(varddl)
+    const findbob = (element) => element == varddl;
+    let mom = data.names.findIndex(findbob);
+    console.log(mom)
     let nameindex = mom;
+    //need to delete h6s
+    dInfo(nameindex);
+    barChart(nameindex);
+    bubbleChart(nameindex);
+    bbWash(nameindex);
+  });
 
 
 
-
+// if nameindex is nill,
+// let nameindex = 0
+// else nameindex = mom
+//set name index default to zero 
+var nameindex=(typeof nameindex === 'undefined')? 0:nameindex;
+console.log(nameindex)
 
 //DEMOGRAPHIC INFO
 // dInfo(0);
@@ -149,7 +165,7 @@ let trace1 = {
 
 
     //GAUGECHART
-
+function bbWash(nameindex) {
   let gaugechartinfo = data.metadata[nameindex].wfreq;
   console.log(gaugechartinfo)
 
@@ -207,7 +223,8 @@ let trace1 = {
     font: { color: "darkblue", family: "Arial" }
   };
   
-  Plotly.newPlot('gauge', data3, layout3);
+  Plotly.newPlot('gauge', data3, layout3)};
+  bbWash(nameindex)
 
   //have all chart info before this last bit so you can call the data from the bellybutton site
 
@@ -228,7 +245,7 @@ let trace1 = {
 // after here to automate ddl selection
 
 
-d3.selectAll("#selDataset").on("change", getData);
+// d3.selectAll("#selDataset").on("change", getData);
 
 // // Function called by DOM changes
 // function getData() {
@@ -272,7 +289,7 @@ d3.selectAll("#selDataset").on("change", getData);
 // }
 
 // Getting a reference to the button on the page with the id property set to `click-me`
-let dropdown = d3.select("#selDataset");
+
 
 // // Getting a reference to the input element on the page with the id property set to 'input-field'
 // let inputField = d3.select("#input-field");
