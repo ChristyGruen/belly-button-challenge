@@ -1,4 +1,5 @@
 //Belly Button Biodiversity Dashboard
+document.body.style.backgroundColor = 'aliceblue';
 
 const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
@@ -86,13 +87,14 @@ d3.json(url).then(function(data) {
         marker:{color: colorlist2}
       };
       let data1 = [trace1];
-
+      
       let layout1 = {
-        title: `ID_${data.names[nameIndex]} Top 10 OTUs`,
+        title: {text: `ID_${data.names[nameIndex]} Top 10 OTUs<br><sup>(Operational Taxonomic Units)</sup>`,font: { size: 24 } },
         showlegend: false,
         height: 400,
         width: 500,
-        margin: { t: 50, r: 25, l: 75, b: 25 },
+        xaxis: {title:"OTU count"},
+        margin: { t: 50, r: 25, l: 75, b: 35},
         paper_bgcolor: "aliceblue",
         font: { color: "darkblue", family: "Arial" }
       };
@@ -128,15 +130,15 @@ d3.json(url).then(function(data) {
     let data2 = [trace2];
 
     let layout2 = {
-      title: `ID_${data.names[nameIndex]} OTU Frequency`,
+      title: {text: `ID_${data.names[nameIndex]} OTU Counts`,font: { size: 24 } },
       showlegend: false,
     //   height: 600,
     //   width: 600,
-      margin: { t: 75, r: 25, l: 50, b: 25 },
+      margin: { t: 75, r: 25, l: 50, b: 35 },
       paper_bgcolor: "aliceblue",
       font: { color: "darkblue", family: "Arial" },
       xaxis: {title:"OTU_ID"},
-      yaxis: {title: "OTU Frequency"}
+      yaxis: {title: "OTU count"}
     };
  
   Plotly.newPlot('bubble', data2, layout2)};
