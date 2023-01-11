@@ -1,13 +1,4 @@
-// let nameindex;
-// let varddl = 940;
-
-//Ian helped with this code, didn't work but is almost there
-//   dropdown.on("change", function() {
-//     varddl = this.value;
-//     console.log(varddl);
-    
-//   })
-
+//Belly Button Biodiversity Dashboard
 
 const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
@@ -15,24 +6,17 @@ const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/
 const dataPromise = d3.json(url);
 console.log("Data Promise: ", dataPromise);
 
-// Fetch the JSON data and console log it
+// Fetch the JSON data and console log it - all subsequent code within this function
  
 d3.json(url).then(function(data) {
 
-console.log(data.names[2]);
+  console.log(data.names[2]);
 
-
-
-//nick's original code  kept getting error app.js:34 Uncaught (in promise) ReferenceError: option is not defined at app.js:34:41
-// let myddl = d3.select('select')
-// data.names.forEach(name => myddl.append(option.attr("value", name)).text(name))
-  // //nick's code with a few fixes  WORKS
+  //Create DDL from names list - working code option 1
   let myddl = d3.select('select');
   data.names.forEach(nameber => myddl.append('option').attr('value',nameber).text(nameber));
 
-
-
-//Chris try another way - WORKS - keep this code for future reference
+  //Create DDL from names list - working code option 2 - keep for future reference
   // Object.entries(data.names).forEach(([key,value])=> {
   //   currentValue = value;
   //   console.log(currentValue)
@@ -40,96 +24,96 @@ console.log(data.names[2]);
   //   newOption.attr('value',currentValue)
   //   newOption.text(currentValue)
   // });
-  let varddl = data.names[0];
 
-// Ian helped with this code, didn't work but is almost there
-let dropdown = d3.select("#selDataset");
-  dropdown.on("change", function() {
-    varddl = this.value;
-    console.log(varddl)
-    const findbob = (element) => element == varddl;
-    nameindex = data.names.findIndex(findbob);
-    d3.select('.panel-body').html("");
-    dInfo(nameindex);
-    barChart(nameindex);
-    bubbleChart(nameindex);
-    bbWash(nameindex);
+ //interactive - user selects test subject ID from DDL. 
+ //This code captures the ID and returns the associated index number (nameIndex) which is passed to the functions to update the visuals
+ //This code also clears out the demographic info before repopulating it with the new data.
+ //find index code from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
+  let dropdown = d3.select("#selDataset");//selects by html id
+  dropdown.on("change", function() {//when there is a change in the selection, do the function
+    userChoice = this.value; //captures the userChoice from the ddl as the Test Sample ID (940)
+    console.log(userChoice);
+    const userChoiceIndex = (element) => element == userChoice;//this is the testing function (find where list element = userChoice)
+    console.log(userChoiceIndex);
+    nameIndex = data.names.findIndex(userChoiceIndex);//takes the userChoice and finds the associated index number (0)
+    console.log(nameIndex);
+    d3.select('.panel-body').html("");//clears out the demographic info 
+    //run the following functions with the new nameIndex
+    dInfo(nameIndex);
+    barChart(nameIndex);
+    bubbleChart(nameIndex);
+    bbWash(nameIndex);
   });
 
-// if nameindex is null,
-// let nameindex = 0
-// else nameindex = mom
-//set name index default to zero 
-var nameindex=(typeof nameindex === 'undefined')? 0:nameindex;
-console.log(nameindex)
+  //set default for nameIndex to 0 NEED TO KEEP VAR - doesn't work with LET
+  
+  var nameIndex=(typeof nameIndex === 'undefined')? 0:nameIndex;
+  console.log(nameIndex)
 
-//DEMOGRAPHIC INFO
-// dInfo(0);
-function dInfo(nameindex) {
-let demoInfo = data.metadata[nameindex];
+  //DEMOGRAPHIC INFO VISUAL
+  //this displays the id, ethnicity, gender, age, location, bellybutton type and wash frequency for the default or selected Test Subject ID
+  function dInfo(nameIndex) {
+    let demoInfo = data.metadata[nameIndex];
     console.log(demoInfo)
+    Object.entries(demoInfo).forEach(([key,value])=> {
+    let addDemoData = d3.select('.panel-body').append('h5');
+    addDemoData.text(`${key}:  ${value}`)
+  })};
+  dInfo(nameIndex);
 
-Object.entries(demoInfo).forEach(([key,value])=> {
-  bob = key;
-  value = value;
-//   let li = d3.select('ul').append('li');
-//   li.text(`${bob}:${value}`)
-  let carrot = d3.select('.panel-body').append('h5');
-  carrot.text(`${bob}:  ${value}`)
-})};
-dInfo(nameindex);
+  //BAR CHART VISUAL
+  //this plots the top ten Operational Taxonomic Units (otu_id) by count (sample_values) 
+  //with additional hover info giving the types of bacteria found (otu_labels) for the default or selected Test Subject ID
+  function barChart(nameIndex) {
+    let barx = data.samples[nameIndex].sample_values.slice(0,10).reverse();//sample_values
+    let bary = data.samples[nameIndex].otu_ids.slice(0,10).reverse();//otu_ids, use this to build string for chart
+    let barystr = []// use this for bar chart
+    bary.forEach(pear => barystr.push(`OTU_${pear}`));
+    let barz = data.samples[nameIndex].otu_labels.slice(0,10).reverse();//otu_labels
+    console.log(barx)
+    console.log(bary)
+    console.log(barz)
+    //color options
+    let colorlist = [ 'red','orangered','orange', 'yellow','yellowgreen', 'green','blue','mediumblue','rebeccapurple','indigo'];//pairs with Jet and Portland
+    let colorlist2 = ['#f0f921','#fdca26','#fb9f3a','#ed7953','#d8576b','#bd3786','#9c179e','#7201a8','#46039f','#0d0887']//reverse plasma
 
-//BAR CHART ;
-function barChart(nameindex) {
-let ohBoyy = data.samples[nameindex].otu_ids.slice(0,10).reverse();//otu_ids
-let ohBoyystr = []
-ohBoyy.forEach(pear => ohBoyystr.push(`OTU_${pear}`));
-let ohBoyx = data.samples[nameindex].sample_values.slice(0,10).reverse();//sample_values
-let ohBoyz = data.samples[nameindex].otu_labels.slice(0,10).reverse();//otu_labels
-console.log(ohBoyy)
-console.log(ohBoyx)
-console.log(ohBoyz)
-let colorlist = [ 'red','orangered','orange', 'yellow','yellowgreen', 'green','blue','mediumblue','rebeccapurple','indigo'];//pairs with Jet and Portland
-let colorlist2 = ['#0d0887', '#46039f', '#7201a8', '#9c179e', '#bd3786', '#d8576b', '#ed7953', '#fb9f3a', '#fdca26', '#f0f921'];//pairs with plasma
-let colorlist3 = ['#f0f921','#fdca26','#fb9f3a','#ed7953','#d8576b','#bd3786','#9c179e','#7201a8','#46039f','#0d0887']//reverse plasma
+    let trace1 = {
+        x: barx,
+        y: barystr,
+        text: barz,
+        type: 'bar',
+        orientation: 'h',
+        marker:{color: colorlist2}
+      };
+      let data1 = [trace1];
 
-let trace1 = {
-    x: ohBoyx,
-    y: ohBoyystr,
-    text: ohBoyz,
-    type: 'bar',
-    orientation: 'h',
-    marker:{color: colorlist3}
-  };
-  let data1 = [trace1];
+      let layout1 = {
+        title: `ID_${data.names[nameIndex]} Top 10 OTUs`,
+        showlegend: false,
+        height: 400,
+        width: 500,
+        margin: { t: 50, r: 25, l: 75, b: 25 },
+        paper_bgcolor: "aliceblue",
+        font: { color: "darkblue", family: "Arial" }
+      };
 
-  var layout1 = {
-    title: `ID_${data.names[nameindex]} Top 10 OTUs`,
-    showlegend: false,
-    height: 400,
-    width: 500,
-    margin: { t: 50, r: 25, l: 75, b: 25 },
-    paper_bgcolor: "aliceblue",
-    // paper_bgcolor: "lavender",
-    font: { color: "darkblue", family: "Arial" }
-  };
+      Plotly.newPlot("bar", data1,layout1)};
+  barChart(nameIndex);
 
+  //BUBBLEPLOT VISUAL
+  //this plots all of the Operational Taxonomic Units (otu_id) on the x axis and by marker color
+  //and count(sample_value) on the y axis and by marker size
+  //additional hover info shows the types of bacteria found (otu_labels) for the default or selected Test Subject ID
+
+  function bubbleChart(nameIndex) {
+    let bubblex = [data.samples[nameIndex].otu_ids];
+    console.log(bubblex)
+    let bubbley = [data.samples[nameIndex].sample_values];
+    console.log(bubbley)
+    let bubblez = [data.samples[nameIndex].otu_labels];
+    console.log(bubblez)
   
-  Plotly.newPlot("bar", data1,layout1)};
-  barChart(nameindex);
-
-//BUBBLEPLOT
-// https://plotly.com/javascript/colorscales/
-
- function bubbleChart(nameindex) {
-  let bubblex = [data.samples[nameindex].otu_ids];
-  console.log(bubblex)
-  let bubbley = [data.samples[nameindex].sample_values];
-  console.log(bubbley)
-  let bubblez = [data.samples[nameindex].otu_labels];
-  console.log(bubblez)
-  
-   var trace2 = {
+   let trace2 = {
       x: bubblex[0],
       y: bubbley[0],
       xlimit: 4000,
@@ -141,12 +125,10 @@ let trace1 = {
         colorscale: 'Electric'//rainbow colorscale options Jet, Portland , other options Bluered, Electric 
       }
     };
-    var data2 = [trace2];
+    let data2 = [trace2];
 
-
-//nameindex variable to be defined by dropdown list event. currently assigned manually above  
-    var layout2 = {
-      title: `ID_${data.names[nameindex]} OTU Frequency`,
+    let layout2 = {
+      title: `ID_${data.names[nameIndex]} OTU Frequency`,
       showlegend: false,
     //   height: 600,
     //   width: 600,
@@ -157,24 +139,22 @@ let trace1 = {
       yaxis: {title: "OTU Frequency"}
     };
  
+  Plotly.newPlot('bubble', data2, layout2)};
+  bubbleChart(nameIndex);
 
-    Plotly.newPlot('bubble', data2, layout2)};
-    bubbleChart(nameindex);
 
+  //GAUGECHART VISUAL
+  //this plots the average number of times that the default or selected Test Subject washed their belly button per week (wfreq)
+  function bbWash(nameIndex) {
+    let gaugechartinfo = data.metadata[nameIndex].wfreq;
+    console.log(gaugechartinfo)
 
-    //GAUGECHART
-function bbWash(nameindex) {
-  let gaugechartinfo = data.metadata[nameindex].wfreq;
-  console.log(gaugechartinfo)
-
-  var data3 = [
-    {
+    let data3 = [
+      {
       type: "indicator",
       mode: "gauge+number",
       value: gaugechartinfo,
-      title: { text: "Belly Button Washing Frequency", font: { size: 24 } },
-    //   title: { text: "Scrubs per Week", font: { size: 16 } },
-      // delta: { reference: 400, increasing: { color: "RebeccaPurple" } },
+      title: { text: "Belly Button Washing Frequency<br><sup>Scrubs per Week</sup>", font: { size: 24 } },
       gauge: {
         axis: { range: [null, 9], tick0: 0, dticks: 8, tickwidth: 1, tickcolor: "darkblue" },
         bar: { color: "darkblue" },
@@ -182,48 +162,47 @@ function bbWash(nameindex) {
         borderwidth: 2,
         bordercolor: "gray",
         steps: [
-            //color scheme pairs with Jet and Portland
-          // { range: [0, 1.5], color: "red"},
-          // { range: [1.5, 3], color: "orange"  },
-          // { range: [3, 4.5], color: "yellow"  },
-          // { range: [4.5, 6], color: "green"  },
-          // { range: [6, 7.5], color: "blue"  },
-          // { range: [7.5, 9], color: "indigo"  },
  
-          // color scheme pairs with Plasma
+          // color scheme 1:  pairs with Jet and Portland (only one color scheme should be active at a time)
+          // { range: [0, 1], color: 'red'},
+          // { range: [1, 2], color: 'orangered'},
+          // { range: [2, 3], color: 'orange'},
+          // { range: [3, 4], color: 'yellow'},
+          // { range: [4, 5], color: 'yellowgreen'},
+          // { range: [5, 6], color: 'green'},
+          // { range: [6, 7], color: 'blue'},
+          // { range: [7, 8], color: 'mediumblue'},
+          // { range: [8, 9], color: 'rebeccapurple'},
+          // //{ range: [9, 10], color: 'purple'} //max washing = 9, don't need this one
+
+          // color scheme 2: pairs with Plasma (only one color scheme should be active at a time)
           { range: [0, 1], color: "#f0f921"},
           { range: [1, 2], color: "#fdca26"},
-          { range: [2, 3], color: "#fb9f3a"  },
-          { range: [3, 4], color: "#ed7953"  },
-          { range: [4, 5], color: "#d8576b"  },
-          { range: [5, 6], color: "#bd3786"  },
-          { range: [6, 7], color: "#9c179e"  },
-          { range: [7, 8], color: "#7201a8"  },
-          { range: [8, 9], color: "#46039f"  }
-        //   { range: [9, 10], color: '#0d0887'  }
-        ],
-        
-        //['#f0f921','#fdca26','#fb9f3a','#ed7953','#d8576b','#bd3786','#9c179e','#7201a8','#46039f','#0d0887']//reverse plasma
-        // threshold: {
-        //   line: { color: "black", width: 4 },
-        //   thickness: 0.75,
-        //   value: 4
-        // }
+          { range: [2, 3], color: "#fb9f3a"},
+          { range: [3, 4], color: "#ed7953"},
+          { range: [4, 5], color: "#d8576b"},
+          { range: [5, 6], color: "#bd3786"},
+          { range: [6, 7], color: "#9c179e"},
+          { range: [7, 8], color: "#7201a8"},
+          { range: [8, 9], color: "#46039f"},
+          //{ range: [9, 10], color: '#0d0887'  }//max washing = 9, don't need this one
+          ],
+        }
       }
-    }
-  ];
+    ];
   
-  var layout3 = {
-    width: 500,
-    height: 400,
-    margin: { t: 100, r: 25, l: 25, b: 25 },
-    paper_bgcolor: "aliceblue",
-    font: { color: "darkblue", family: "Arial" }
-  };
+    let layout3 = {
+      width: 500,
+      height: 400,
+      margin: { t: 100, r: 25, l: 25, b: 25 },
+      paper_bgcolor: "aliceblue",
+      font: { color: "darkblue", family: "Arial" }
+    };
   
   Plotly.newPlot('gauge', data3, layout3)};
-  bbWash(nameindex)
-
-  //have all chart info before this last bit so you can call the data from the bellybutton site
+  bbWash(nameIndex)
 
 });
+
+// helpful things I found along the way
+// https://plotly.com/javascript/colorscales/

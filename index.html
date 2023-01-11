@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bellybutton Biodiversity</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/styles.css">
+  
 </head>
 
 <body>
@@ -26,30 +28,25 @@
         </select> -->
         <select id="selDataset">
         </select>
-        <!-- <result>0</result> -->
         </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Demographic Info</h3>
           </div>
           <div id="sample-metadata" class="panel-body"></div>
-          <!-- this is where the demographic info goes -->
           <ul style="list-style: none"></ul>
         </div>
       </div>
       <div class="col-md-7">
         <div id="bar"></div>
-        <!-- this is the bar chart -->
       </div>
       <div class="col-md-3">
         <div id="gauge"></div>
-        <!-- this is the gauge -->
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <div id="bubble"></div>
-        <!-- this is the bubble chart -->
       </div>
     </div>
   </div>
@@ -57,15 +54,14 @@
 <br>
 <div class="col-md-12 jumbotron text-center">
   <h3>Belly Button Biodiversity data provided by</h3>
-  <p>http://robdunnlab.com/projects/belly-button-biodiversity/</p>
+  <a href = 'http://robdunnlab.com/projects/belly-button-biodiversity/' target="_blank">http://robdunnlab.com/projects/belly-button-biodiversity/</a>
 </div>
 
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="./static/js/app.js"></script>
   <script src="./static/js/samples.js"></script>
-  <!-- <script src="./static/js/bonus.js"></script>
-   -->
+
 </body>
 
 </html>
