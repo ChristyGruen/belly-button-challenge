@@ -1,9 +1,25 @@
 
-
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow */
 /* header colors */
-h1 {
-    color:"darkblue"
+
+.jumbotron {
+    background-color: "yellow";
+    background-image:none;
+    text-align:center;
 }
+/* 
+#blueBold {
+    color:"blue";
+    font-weight: bold;
+    /* font-size: 25px; */
+/* } */
+
+#shadowbox {
+box-shadow: 10px 5px 5px "blue";
+} */
+
+
+
 /* h2 {
     color:rgb(84, 163, 137)
 }

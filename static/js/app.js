@@ -208,3 +208,5 @@ d3.json(url).then(function(data) {
 
 // helpful things I found along the way
 // https://plotly.com/javascript/colorscales/
+
+//can search bootstrap
