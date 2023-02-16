@@ -4,14 +4,25 @@
 
 .jumbotron {
     background-size: cover;
-    color: rgb(255, 255, 102);
-    background-image: url('/static/images/bellybuttons2.png');
-    text-align: center;
+    /* background-color: rgb(137, 145, 182); */
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/1/1b/Lovely_belly_dancers_from_Endless_Productions_%288104142749%29.jpg");
+    background-repeat: no-repeat;
+    color: rgb(233, 229, 23);
+    /* text-align: center; */
+    vertical-align:text-top;
+    
+
+    /* padding: 5em inherit; */
+    min-height:450px;
 
 }
 
-.blur{
-    filter: blur(4px)
+.words{
+    color:rgb(0, 0, 139) ;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    padding: 10px;
 }
  
 .footer {
