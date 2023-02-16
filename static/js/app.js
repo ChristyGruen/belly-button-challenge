@@ -16,6 +16,7 @@ d3.json(url).then(function(data) {
   //Create DDL from names list - working code option 1
   let myddl = d3.select('select');
   data.names.forEach(nameber => myddl.append('option').attr('value',nameber).text(nameber));
+  
 
   //Create DDL from names list - working code option 2 - keep for future reference
   // Object.entries(data.names).forEach(([key,value])=> {
